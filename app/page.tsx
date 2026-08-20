@@ -56,7 +56,7 @@ export default function Home() {
             <div className="hero-proof">
               <span>✓ 교육비 최대 95% 지원</span>
               <span>✓ 집체·비대면 실시간</span>
-              <span>✓ 연중 상시 운영</span>
+              <span>✓ 역할별 8개 승인 과정</span>
             </div>
           </div>
           <div className="hero-visual" aria-label="AI 역량 로드맵 미리보기">
@@ -110,11 +110,10 @@ export default function Home() {
             {benefits.map(([title, value], i) => <div className="benefit-card" key={title}><span>0{i+1}</span><small>{title}</small><strong>{value}</strong></div>)}
           </div>
           <div className="eligibility-panel">
-            <div><span className="kicker light">ELIGIBILITY CHECK</span><h3>우리 회사도 지원받을 수 있을까요?</h3><p>기업 정보를 기준으로 지원 대상 여부와 적합한 교육과정을 함께 확인해보세요.</p></div>
-            <form className="eligibility-form" action="#consult">
-              <label>사업자등록번호 <input aria-label="사업자등록번호" placeholder="000-00-00000" /></label>
-              <button className="button button-light" type="submit">지원 가능 여부 확인하기</button>
-            </form>
+            <div><span className="kicker light">ELIGIBILITY GUIDE</span><h3>우리 회사도 지원받을 수 있을까요?</h3><p>현재 페이지는 실시간 자격 조회를 제공하지 않습니다. 상담을 통해 지원 가능 여부와 적합한 승인 과정을 안내드립니다.</p></div>
+            <div className="eligibility-form">
+              <a className="button button-light" href="#consult">지원 가능 여부 상담하기</a>
+            </div>
           </div>
         </div>
       </section>
@@ -135,7 +134,7 @@ export default function Home() {
           <div className="metrics">
             <div><strong>8</strong><span>승인 AI 교육과정</span></div>
             <div><strong>4→21H</strong><span>수준별 교육 시간</span></div>
-            <div><strong>100%</strong><span>현업 적용 중심 구성</span></div>
+            <div><strong>4 STEP</strong><span>조직 AI 역량 로드맵</span></div>
             <div><strong>B2B</strong><span>기업교육 전담 운영</span></div>
           </div>
         </div>
@@ -202,7 +201,7 @@ export default function Home() {
         <div className="container resource-grid">
           <div className="section-heading"><span className="kicker">DOWNLOAD</span><h2>내부 검토에 필요한 자료를<br/>한 번에 확인하세요.</h2></div>
           <div className="resource-list">
-            {['8개 승인 교육과정 한눈에 보기','중소기업 인재키움 사업 안내서','프로그래머스 기업교육 소개서'].map((x)=><a href="#consult" key={x}><span>PDF</span><b>{x}</b><i>↓</i></a>)}
+            {['8개 승인 교육과정 한눈에 보기','중소기업 인재키움 사업 안내서','프로그래머스 기업교육 소개서'].map((x)=><a href="#consult" key={x}><span>준비 중</span><b>{x}</b><i>→</i></a>)}
           </div>
         </div>
       </section>
