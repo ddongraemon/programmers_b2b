@@ -73,6 +73,29 @@ jobs:
         with:
           path: ./out
 
+  diagnose-build:
+    if: always()
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Report unexpected build job failure
+        if: needs.build.result != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD_RESULT: ${{ needs.build.result }}
+        shell: bash
+        run: |
+          {
+            echo "## GitHub Pages build job failed"
+            echo
+            echo "Build result: $BUILD_RESULT"
+            echo "Commit: $GITHUB_SHA"
+            echo "Run: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo "The failure happened outside the npm install/build steps. Open the run URL above for the failing Actions step."
+          } > build-job-failure.md
+          gh issue create --title "[deploy-debug] Pages build job failed outside app build" --body-file build-job-failure.md || true
+
   deploy:
     environment:
       name: github-pages
