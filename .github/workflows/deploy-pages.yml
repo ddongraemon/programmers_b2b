@@ -51,6 +51,7 @@ jobs:
             echo "## Automated deployment diagnostic"
             echo
             echo "Commit: $GITHUB_SHA"
+            echo "Run: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             echo
             if [ -f install.log ]; then
               echo "### npm install"
@@ -82,3 +83,36 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - name: Report deployment result
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOY_OUTCOME: ${{ steps.deployment.outcome }}
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        shell: bash
+        run: |
+          if [ "$DEPLOY_OUTCOME" = "success" ]; then
+            {
+              echo "## GitHub Pages deployment succeeded"
+              echo
+              echo "URL: $PAGE_URL"
+              echo "Commit: $GITHUB_SHA"
+              echo "Run: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            } > deploy-result.md
+            gh issue create --title "[deploy-success] GitHub Pages deployed" --body-file deploy-result.md || true
+          else
+            gh run view "$GITHUB_RUN_ID" --log-failed > failed-run.log 2>&1 || true
+            {
+              echo "## GitHub Pages deployment failed"
+              echo
+              echo "Commit: $GITHUB_SHA"
+              echo "Run: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+              echo
+              echo "### Failed run log"
+              echo '```text'
+              tail -n 180 failed-run.log
+              echo '```'
+            } > deploy-result.md
+            gh issue create --title "[deploy-debug] GitHub Pages deploy failed" --body-file deploy-result.md || true
+          fi
