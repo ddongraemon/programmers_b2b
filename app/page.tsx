@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const courses = [
   { step: "01", tone: "blue", eyebrow: "AI 기초 · 전사 역량", title: "신입·주니어를 위한 AI 업무 기초 활용", hours: "7H", audience: "신입·주니어", desc: "ChatGPT·Claude 등 생성형 AI를 보고서, 이메일, 회의록 등 일상 업무에 바로 적용합니다." },
   { step: "01", tone: "blue", eyebrow: "AI 기초 · 전사 역량", title: "전 직원 AI 역량진단·학습 과정", hours: "4H", audience: "전 직원", desc: "AI 이해·프롬프트·자동화·데이터·보안 역량을 진단하고 개인별 다음 학습 단계를 설계합니다." },
@@ -26,6 +30,13 @@ const benefits = [
 ];
 
 export default function Home() {
+  const [activeStep, setActiveStep] = useState("01");
+  const [isEligibilityOpen, setIsEligibilityOpen] = useState(false);
+  const [participants, setParticipants] = useState("20");
+  const visibleCourses = courses.filter((course) => course.step === activeStep);
+  const estimatedCost = Number(participants) * 280000;
+  const estimatedSupport = Math.round(estimatedCost * 0.95);
+
   return (
     <main>
       <nav className="topbar">
@@ -112,7 +123,7 @@ export default function Home() {
           <div className="eligibility-panel">
             <div><span className="kicker light">ELIGIBILITY GUIDE</span><h3>우리 회사도 지원받을 수 있을까요?</h3><p>현재 페이지는 실시간 자격 조회를 제공하지 않습니다. 상담을 통해 지원 가능 여부와 적합한 승인 과정을 안내드립니다.</p></div>
             <div className="eligibility-form">
-              <a className="button button-light" href="#consult">지원 가능 여부 상담하기</a>
+              <button className="button button-light" type="button" onClick={() => setIsEligibilityOpen(true)}>지원 가능 여부 확인하기</button>
             </div>
           </div>
         </div>
@@ -123,34 +134,34 @@ export default function Home() {
           <div className="section-heading centered inverse"><span className="kicker light">WHY PROGRAMMERS</span><h2>같은 정부지원 교육이라면,<br/>왜 프로그래머스일까요?</h2><p>정부지원 혜택은 같아도 교육의 깊이와 현업 적용 방식은 다를 수 있습니다.</p></div>
           <div className="why-grid">
             {[
-              ["01", "AI·개발 교육 전문성", "AI 기초 활용부터 실제 서비스 구현까지 기술 역량을 하나의 흐름으로 연결합니다."],
-              ["02", "현업 적용 중심", "이론 설명보다 실제 업무 문서·데이터·프로세스를 활용한 실습 비중을 높였습니다."],
-              ["03", "역할별 교육 체계", "전 직원, 실무자, 관리자, 개발자에게 필요한 AI 역량을 각각 다르게 설계했습니다."],
-              ["04", "실습·워크숍·프로젝트", "과정 특성에 따라 실습, 로드맵 워크숍, MVP·PoC 프로젝트까지 직접 수행합니다."],
-              ["05", "현업 전문 강사진", "AI와 개발 실무를 이해하는 강사진을 중심으로 실전형 교육을 운영합니다."],
-              ["06", "기업교육 운영 경험", "다양한 기업의 기술교육을 운영하며 축적한 B2B 교육 노하우를 반영합니다."],
-            ].map(([no,title,desc]) => <article className="why-card" key={no}><span>{no}</span><h3>{title}</h3><p>{desc}</p></article>)}
+              ["01", "⌘", "AI·개발 교육 전문성", "AI 기초 활용부터 실제 서비스 구현까지 기술 역량을 하나의 흐름으로 연결합니다."],
+              ["02", "↗", "현업 적용 중심", "이론 설명보다 실제 업무 문서·데이터·프로세스를 활용한 실습 비중을 높였습니다."],
+              ["03", "◎", "역할별 교육 체계", "전 직원, 실무자, 관리자, 개발자에게 필요한 AI 역량을 각각 다르게 설계했습니다."],
+              ["04", "✦", "실습·워크숍·프로젝트", "과정 특성에 따라 실습, 로드맵 워크숍, MVP·PoC 프로젝트까지 직접 수행합니다."],
+              ["05", "◌", "현업 전문 강사진", "AI와 개발 실무를 이해하는 강사진을 중심으로 실전형 교육을 운영합니다."],
+              ["06", "▦", "기업교육 운영 경험", "다양한 기업의 기술교육을 운영하며 축적한 B2B 교육 노하우를 반영합니다."],
+            ].map(([no,icon,title,desc]) => <article className="why-card" key={no}><div className="why-card-top"><span>{no}</span><i aria-hidden="true">{icon}</i></div><h3>{title}</h3><p>{desc}</p></article>)}
           </div>
           <div className="metrics">
-            <div><strong>8</strong><span>승인 AI 교육과정</span></div>
-            <div><strong>4→21H</strong><span>수준별 교육 시간</span></div>
-            <div><strong>4 STEP</strong><span>조직 AI 역량 로드맵</span></div>
-            <div><strong>B2B</strong><span>기업교육 전담 운영</span></div>
+            <div><strong>250+</strong><span>샘플 기업교육 진행</span></div>
+            <div><strong>12,000+</strong><span>샘플 누적 수강생</span></div>
+            <div><strong>4.8 / 5</strong><span>샘플 교육 만족도</span></div>
+            <div><strong>92%</strong><span>샘플 현업 적용 응답</span></div>
           </div>
+          <p className="sample-note">* 위 수치는 디자인 검토용 예시 데이터입니다.</p>
         </div>
       </section>
 
       <section className="section" id="courses">
         <div className="container">
           <div className="section-heading centered"><span className="kicker">LEARNING ROADMAP</span><h2>우리 조직은 지금<br/>어느 단계에 있나요?</h2><p>8개 과정을 단순히 나열하지 않고 조직의 AI 역량 성장 단계에 맞춰 연결했습니다.</p></div>
-          <div className="step-line">
-            <div className="step blue-border"><b>STEP 01</b><span>AI 이해</span></div><i>→</i>
-            <div className="step purple-border"><b>STEP 02</b><span>업무 활용</span></div><i>→</i>
-            <div className="step green-border"><b>STEP 03</b><span>조직 AX</span></div><i>→</i>
-            <div className="step red-border"><b>STEP 04</b><span>서비스 구현</span></div>
+          <div className="step-line" role="tablist" aria-label="AI 교육 단계">
+            {[["01", "AI 이해", "blue-border"], ["02", "업무 활용", "purple-border"], ["03", "조직 AX", "green-border"], ["04", "서비스 구현", "red-border"]].map(([step, label, color]) => (
+              <button key={step} type="button" role="tab" aria-selected={activeStep === step} className={`step ${color} ${activeStep === step ? "is-active" : ""}`} onClick={() => setActiveStep(step)}><b>STEP {step}</b><span>{label}</span><small>{activeStep === step ? "과정 보기" : "선택"}</small></button>
+            ))}
           </div>
           <div className="course-grid">
-            {courses.map((c) => (
+            {visibleCourses.map((c) => (
               <article className={`course-card ${c.tone}-card`} key={c.title}>
                 <div className="course-meta"><span>{c.eyebrow}</span><b>STEP {c.step}</b></div>
                 <h3>{c.title}</h3><p>{c.desc}</p>
@@ -164,15 +175,19 @@ export default function Home() {
       <section className="section section-soft">
         <div className="container case-layout">
           <div className="section-heading"><span className="kicker purple-text">BUSINESS CASE</span><h2>기업교육은<br/>실제 변화로 증명됩니다.</h2><p>향후 기존 프로그래머스 기업교육 사례를 문제 → 교육 → 실습 → 변화의 구조로 배치할 영역입니다.</p><a className="text-link" href="#consult">기업교육 상담하기 →</a></div>
-          <div className="case-card">
-            <div className="case-company"><span>CASE SAMPLE</span><strong>A Company</strong></div>
-            <ol>
-              <li><b>Problem</b><p>반복적인 데이터 취합과 리포트 작성에 많은 시간이 소요</p></li>
-              <li><b>Education</b><p>Python + AI 기반 데이터 분석·업무자동화 교육</p></li>
-              <li><b>Practice</b><p>실제 업무 데이터를 활용한 자동화 실습 및 팀 프로젝트</p></li>
-              <li><b>Result</b><p>반복 업무 자동화와 직원의 AI 활용 역량 강화</p></li>
-            </ol>
-          </div>
+          <article className="case-card case-card-visual">
+            <div className="case-image"><img src="/sample-ai-workshop.png" alt="샘플 기업교육 워크숍 현장" /></div>
+            <div className="case-content">
+              <div className="case-company"><span>SAMPLE CASE · A사</span><strong>데이터 기반 업무 혁신</strong></div>
+              <div className="case-results"><span><b>36%</b>보고서 작성 시간 단축</span><span><b>4.8/5</b>교육 만족도</span><span><b>92%</b>현업 적용 의향</span></div>
+              <ol>
+                <li><b>Problem</b><p>반복적인 데이터 취합과 리포트 작성에 많은 시간이 소요</p></li>
+                <li><b>Education</b><p>Python + AI 기반 데이터 분석·업무자동화 교육</p></li>
+                <li><b>Result</b><p>반복 업무 자동화와 직원의 AI 활용 역량 강화</p></li>
+              </ol>
+              <small className="sample-note">* 기업명·이미지·성과 수치는 디자인 검토용 예시입니다.</small>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -225,6 +240,23 @@ export default function Home() {
       </section>
 
       <footer><div className="container footer-inner"><div className="brand"><span className="brand-mark">P</span><span>programmers <b>business</b></span></div><p>© Grepp, Inc. Landing page prototype for B2B training.</p></div></footer>
+      {isEligibilityOpen && (
+        <div className="modal-backdrop" role="presentation" onMouseDown={() => setIsEligibilityOpen(false)}>
+          <section className="eligibility-modal" role="dialog" aria-modal="true" aria-labelledby="eligibility-title" onMouseDown={(event) => event.stopPropagation()}>
+            <button className="modal-close" type="button" aria-label="지원 가능 여부 확인 창 닫기" onClick={() => setIsEligibilityOpen(false)}>×</button>
+            <span className="kicker">SUPPORT ESTIMATOR</span>
+            <h2 id="eligibility-title">우리 회사의 예상 지원 범위를<br/>빠르게 확인해보세요.</h2>
+            <p>교육 인원과 대표 과정을 기준으로 산출한 샘플 결과입니다. 실제 지원 가능 여부와 금액은 상담으로 확인됩니다.</p>
+            <label className="field-label">예상 교육 인원
+              <select value={participants} onChange={(event) => setParticipants(event.target.value)}>
+                <option value="10">10명</option><option value="20">20명</option><option value="30">30명</option><option value="50">50명</option>
+              </select>
+            </label>
+            <div className="estimator-result"><span>AI 업무 기초 활용 7H 기준</span><strong>최대 {estimatedSupport.toLocaleString("ko-KR")}원 지원 예상</strong><small>예상 총 훈련비 {estimatedCost.toLocaleString("ko-KR")}원 · 최대 95% 적용 가정</small></div>
+            <a className="button" href="mailto:b2b@programmers.co.kr">상담으로 정확한 지원금 확인하기</a>
+          </section>
+        </div>
+      )}
     </main>
   );
 }

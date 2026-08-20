@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./interactions.css";
 
 export const metadata: Metadata = {
   title: "프로그래머스 | 중소기업 인재키움 프리미엄 훈련",
