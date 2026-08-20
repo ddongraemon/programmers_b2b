@@ -47,7 +47,7 @@ export default function Home() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <span className="pill">중소기업 인재키움 프리미엄 훈련</span>
-            <h1>전 직원부터 개발자까지,<br/><em>우리 조직에 필요한 AI 역량</em>을 키우세요.</h1>
+            <h1><span>전 직원부터 개발자까지</span><em>우리 조직에 필요한<br/>AI 역량을 키우세요.</em></h1>
             <p className="hero-lead">AI 기초부터 업무 자동화, 조직 AX, AI 서비스 구현까지. 프로그래머스의 8개 승인 과정으로 단계별 학습을 시작하세요.</p>
             <div className="hero-actions">
               <a className="button" href="#eligibility">우리 회사 지원 가능 여부 확인</a>
