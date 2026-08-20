@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  issues: write
 
 concurrency:
   group: "pages"
@@ -26,16 +27,45 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-        with:
-          static_site_generator: next
-
       - name: Install dependencies
-        run: npm install
+        id: install
+        shell: bash
+        run: |
+          set -o pipefail
+          npm install 2>&1 | tee install.log
 
       - name: Build with Next.js
-        run: npm run build
+        id: build
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build.log
+
+      - name: Report build failure
+        if: failure() && (steps.install.outcome == 'failure' || steps.build.outcome == 'failure')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          {
+            echo "## Automated deployment diagnostic"
+            echo
+            echo "Commit: $GITHUB_SHA"
+            echo
+            if [ -f install.log ]; then
+              echo "### npm install"
+              echo '```text'
+              tail -n 120 install.log
+              echo '```'
+            fi
+            if [ -f build.log ]; then
+              echo "### npm run build"
+              echo '```text'
+              tail -n 160 build.log
+              echo '```'
+            fi
+          } > deploy-failure.md
+          gh issue create --title "[deploy-debug] GitHub Pages build failed" --body-file deploy-failure.md || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
