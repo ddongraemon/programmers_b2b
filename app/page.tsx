@@ -71,7 +71,7 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-visual hero-illustration" aria-label="동료들과 함께 AI를 배우는 기업교육 현장">
-            <div className="hero-image-wrap"><img src="/hero-ai-learning.png" alt="AI를 함께 배우고 아이디어를 나누는 직장인들" /></div>
+            <div className="hero-image-wrap"><img src="hero-ai-learning.png" alt="AI를 함께 배우고 아이디어를 나누는 직장인들" /></div>
             <div className="hero-sticker hero-sticker-a"><b>최대 95%</b><span>훈련비 지원</span></div>
             <div className="hero-sticker hero-sticker-b"><span>역할별</span><b>8개 승인 과정</b></div>
             <div className="hero-spark" aria-hidden="true">✦</div>
@@ -169,7 +169,7 @@ export default function Home() {
         <div className="container case-layout">
           <div className="section-heading"><span className="kicker purple-text">BUSINESS CASE</span><h2>기업교육은<br/>실제 변화로 증명됩니다.</h2><p>향후 기존 프로그래머스 기업교육 사례를 문제 → 교육 → 실습 → 변화의 구조로 배치할 영역입니다.</p><a className="text-link" href="#consult">기업교육 상담하기 →</a></div>
           <article className="case-card case-card-visual">
-            <div className="case-image"><img src="/sample-ai-workshop.png" alt="샘플 기업교육 워크숍 현장" /></div>
+            <div className="case-image"><img src="sample-ai-workshop.png" alt="샘플 기업교육 워크숍 현장" /></div>
             <div className="case-content">
               <div className="case-company"><span>SAMPLE CASE · A사</span><strong>데이터 기반 업무 혁신</strong></div>
               <div className="case-results"><span><b>36%</b>보고서 작성 시간 단축</span><span><b>4.8/5</b>교육 만족도</span><span><b>92%</b>현업 적용 의향</span></div>
