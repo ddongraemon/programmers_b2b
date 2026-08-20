@@ -70,19 +70,11 @@ export default function Home() {
               <span>✓ 역할별 8개 승인 과정</span>
             </div>
           </div>
-          <div className="hero-visual" aria-label="AI 역량 로드맵 미리보기">
-            <div className="visual-card visual-card-main">
-              <div className="visual-label">ORGANIZATION AI ROADMAP</div>
-              <div className="visual-score"><small>교육 과정</small><strong>8</strong><span>approved courses</span></div>
-              <div className="roadmap-mini">
-                <div><i className="dot blue"/><span>AI 이해</span></div>
-                <div><i className="dot purple"/><span>업무 활용</span></div>
-                <div><i className="dot green"/><span>조직 AX</span></div>
-                <div><i className="dot red"/><span>서비스 구현</span></div>
-              </div>
-            </div>
-            <div className="float-card float-card-a"><b>95%</b><span>최대 지원</span></div>
-            <div className="float-card float-card-b"><b>4H → 21H</b><span>단계별 과정</span></div>
+          <div className="hero-visual hero-illustration" aria-label="동료들과 함께 AI를 배우는 기업교육 현장">
+            <div className="hero-image-wrap"><img src="/hero-ai-learning.png" alt="AI를 함께 배우고 아이디어를 나누는 직장인들" /></div>
+            <div className="hero-sticker hero-sticker-a"><b>최대 95%</b><span>훈련비 지원</span></div>
+            <div className="hero-sticker hero-sticker-b"><span>역할별</span><b>8개 승인 과정</b></div>
+            <div className="hero-spark" aria-hidden="true">✦</div>
           </div>
         </div>
       </section>
@@ -94,6 +86,7 @@ export default function Home() {
             <h2>교육 후, 우리 조직에서<br/>이런 변화가 가능합니다.</h2>
             <p>무엇을 배우는지보다, 실제 업무에서 무엇을 할 수 있게 되는지를 먼저 보여드립니다.</p>
           </div>
+          <div className="outcome-caption"><span>수료증보다 중요한 것</span><b>월요일 업무가 달라지는 교육</b></div>
           <div className="outcome-grid">
             {[
               ["01", "AI 업무 활용", "보고서·이메일·회의록·콘텐츠 제작에 생성형 AI를 바로 적용합니다."],
@@ -207,7 +200,7 @@ export default function Home() {
         <div className="container">
           <div className="section-heading centered"><span className="kicker">PROCESS</span><h2>상담부터 교육, 행정까지<br/>복잡하지 않게.</h2></div>
           <div className="process-grid">
-            {[["01","교육 상담","기업 목표와 교육 대상 확인"],["02","과정 확정","8개 승인 과정 중 적합한 과정 선택"],["03","교육 진행","집체 또는 비대면 실시간 교육 운영"],["04","행정 · 환급","필요 절차와 환급 관련 안내 지원"]].map(([no,title,desc]) => <div className="process-card" key={no}><span>{no}</span><h3>{title}</h3><p>{desc}</p></div>)}
+            {[["01","☏","교육 상담","기업 목표와 교육 대상 확인"],["02","↗","과정 확정","8개 승인 과정 중 적합한 과정 선택"],["03","✦","교육 진행","집체 또는 비대면 실시간 교육 운영"],["04","✓","행정 · 환급","필요 절차와 환급 관련 안내 지원"]].map(([no,icon,title,desc]) => <div className="process-card" key={no}><span>{no}</span><i aria-hidden="true">{icon}</i><h3>{title}</h3><p>{desc}</p></div>)}
           </div>
         </div>
       </section>
